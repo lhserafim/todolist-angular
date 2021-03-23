@@ -1,0 +1,14 @@
+<!-- Para que esta tag seja exibida, eu preciso chamá-la na app.component.html usando a tag <app-todos>-->
+<!-- Usando a diretiva *ngFor para percorrer a lista de todos e capturar a propriedade title -->
+<!-- <ul *ngFor="let todo of todos">
+    <li>{{ todo.title }}</li>
+</ul> -->
+
+<!-- Componentização: Ao invés de ter um componente todos (apenas) eu vou trazer uma lista de todo-item, ou seja
+cada item de todo será um componente de todo-item -->
+<!-- Para poder usar o [todo] necessário criar:
+export class TodoItemComponent implements OnInit {
+    @Input() todo: Todo; -->
+<app-todo-item *ngFor="let todo of todos" [todo]="todo">
+
+</app-todo-item>
