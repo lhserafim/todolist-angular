@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../../models/Todo'
+import { TodoService } from '../../service/todo.service'; // Importação do TodoService para ser usado dentro do construtor. O service se Injectable, permite isso
 
 @Component({
   selector: 'app-todos',
@@ -12,26 +13,28 @@ export class TodosComponent implements OnInit {
   // com a estrutura que eu quero e depois importo aqui
   todos:Todo[]; 
 
-  constructor() { }
+  constructor(private todoService:TodoService) { }
 
   ngOnInit(): void {
-    this.todos = [
-      {
-        id: 1,
-        title: 'Todo One',
-        completed: false
-      },
-      {
-        id: 2,
-        title: 'Todo Two',
-        completed: true
-      },
-      {
-        id: 1,
-        title: 'Todo Three',
-        completed: false
-      }
-    ]
+    this.todos = this.todoService.getTodos(); // este método carrega um array de objetos
+    // Movido o HardCode para o todo.service.ts
+    // this.todos = [
+    //   {
+    //     id: 1,
+    //     title: 'Todo One',
+    //     completed: false
+    //   },
+    //   {
+    //     id: 2,
+    //     title: 'Todo Two',
+    //     completed: true
+    //   },
+    //   {
+    //     id: 1,
+    //     title: 'Todo Three',
+    //     completed: false
+    //   }
+    // ]
   }
 
 }

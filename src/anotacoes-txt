@@ -13,7 +13,7 @@ um deles. Exemplo: <app-todo>, <app-todo-item>, etc
                 completed: boolean;
             }
 5. O Angular trabalha fortemente com exportações e importações e é assim que temos acesso a dados, tipos, etc de outros módulos
-6. Diretivas: As diretivas são marcadores em um elemento DOM (como um atributo) que informam ao Angular para anexar um comportamento 
+6. DIRETIVAS: As diretivas são marcadores em um elemento DOM (como um atributo) que informam ao Angular para anexar um comportamento 
    especificado a um elemento existente.
    Algumas diretivas podem mudar completamente a estrutura da saída do template do componente. Essas diretivas podem alterar o 
    layout do DOM adicionando e removendo elementos DOM de visualização.
@@ -34,6 +34,9 @@ um deles. Exemplo: <app-todo>, <app-todo-item>, etc
         Components—directives with a template. This type of directive is the most common directive type.
         Attribute directives—directives that change the appearance or behavior of an element, component, or another directive.
         Structural directives—directives that change the DOM layout by adding and removing DOM elements.
-7. Eventos: Os eventos permitem que você "escute e responda" a ações do usuário feitas através do mouse e do teclado. A sintaxe do evento
+7. EVENTOS: Os eventos permitem que você "escute e responda" a ações do usuário feitas através do mouse e do teclado. A sintaxe do evento
    Deve ser (), ex.: (click), (change), (input), etc. Capturando este evento, posso chamar meus métodos e/ou alterar uma propriedade da tag
    sem usar a diretiva de atributo
+8. SERVICES:
+    8.1. Criando um service: ng g s service/Todo
+    8.2. A importação do Injectable permite injetar o service dentro de um construtor de um componente
