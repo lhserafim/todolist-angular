@@ -1,0 +1,39 @@
+Anotações:
+1. O ponto de entrada do Angular é o arquivo index.html, é neste arquivo que o "sistema" sai apontando para os outros HTML's e seus componentes
+2. No arquivo index.html, temos o apontamento para a tag <app-root> e é por este path que o sistema entra dentro do diretório components
+3. Dentro de components, eu posso criar quantos components eu quiser e associar um aos outros através do uso das tags que são criadas para cada 
+um deles. Exemplo: <app-todo>, <app-todo-item>, etc
+4. Angular é compatível e DEVE ser escrito utilizando TypeScript. Por isso tipificamos as variáveis.
+    4.1. Uma coisa que é permitido em TS é criar nossos próprios tipos, como se fosse uma classe, ou DTO no java. Para isso precisamos criar o tipo
+         dentro de src/models/
+         Ex.: 
+         export class Todo {
+                id: number;
+                title: string;
+                completed: boolean;
+            }
+5. O Angular trabalha fortemente com exportações e importações e é assim que temos acesso a dados, tipos, etc de outros módulos
+6. Diretivas: As diretivas são marcadores em um elemento DOM (como um atributo) que informam ao Angular para anexar um comportamento 
+   especificado a um elemento existente.
+   Algumas diretivas podem mudar completamente a estrutura da saída do template do componente. Essas diretivas podem alterar o 
+   layout do DOM adicionando e removendo elementos DOM de visualização.
+    6.1. Podemos classificar essas diretivas em estruturais. 
+        Usadas com *
+        *NgIf
+        *NgFor
+        *NgSwitch, NgSwitchWhen, NgSwitchDefault
+    6.2. Outras diretivas podem simplesmente alterar a aparência dos itens gerados pelo modelo. 
+         Vamos chamar essas diretivas de atributo:
+        Usadas dentro de []
+        [NgClass]
+        [NgStyle]
+        [NgControlName]
+        [NgModel]
+    6.3. https://angular.io/guide/built-in-directives
+        The different types of Angular directives are as follows:
+        Components—directives with a template. This type of directive is the most common directive type.
+        Attribute directives—directives that change the appearance or behavior of an element, component, or another directive.
+        Structural directives—directives that change the DOM layout by adding and removing DOM elements.
+7. Eventos: Os eventos permitem que você "escute e responda" a ações do usuário feitas através do mouse e do teclado. A sintaxe do evento
+   Deve ser (), ex.: (click), (change), (input), etc. Capturando este evento, posso chamar meus métodos e/ou alterar uma propriedade da tag
+   sem usar a diretiva de atributo

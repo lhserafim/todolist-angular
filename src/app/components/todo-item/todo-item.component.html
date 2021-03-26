@@ -1,7 +1,20 @@
-<div>
+<!-- 
+    DIRETIVAS
+    Vou usar uma diretiva não estrutural (diretiva de atributo), para mudar o comportamento do meu elemento e aplicar a classe CSS se 
+    determinada condição for atendida. Neste exemplo, eu vou chamar um método 
+    Também chamamos isso de dynamic class binding 
+-->
+
+<!-- 
+    EVENTOS
+    Os eventos podem mudar o comportamento de um elemento e devem ser adicionados na tag com ()
+    repare que os eventos podem ser variados (change), (click), (input)
+ -->
+
+<div [ngClass]="setClasses()">
     <p>
-        <input type="checkbox" />
+        <input (change)="onToggle(todo)" type="checkbox" />
         {{ todo.title }}
-        <button class="del">x</button>
+        <button (click)="onDelete(todo)" class="del">x</button>
     </p>
 </div>
