@@ -1,0 +1,11 @@
+<!-- 
+    Para poder utilizar o [(ngModel)]="title" é necessário fazer a importação abaixo em app.module.ts 
+    import { FormsModule } from '@angular/forms';
+    E adicionar aos imports
+-->
+
+<!-- (ngSubmit) é um evento, chamando o metodo onSubmit() -->
+<form class="form" (ngSubmit)="onSubmit()">
+    <input type="text" name="title" [(ngModel)]="title" placeholder="Add Todo...">
+    <input type="submit" value="Submit" class="btn">
+</form>

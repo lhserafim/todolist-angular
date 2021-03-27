@@ -101,3 +101,8 @@ um deles. Exemplo: <app-todo>, <app-todo-item>, etc
     Em todo
         Dentro da tag app-todo-item, criamos um evento(deleteTodo), chamando um método criado na todos.component.ts. 
         O método recebe a captura do evento, através de $event e executa o método.    
+12. Quando usamos [()] estamos transormando em uma two way data bind
+    Ex.: [(ngModel)]
+    12.1. Para poder utilizar o [(ngModel)]="title" é necessário fazer a importação abaixo em app.module.ts 
+          import { FormsModule } from '@angular/forms';
+          E adicionar aos imports

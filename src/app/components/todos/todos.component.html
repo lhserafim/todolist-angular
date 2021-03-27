@@ -18,6 +18,7 @@
     deleteTodo() é o método criado em todos.component.ts
     $event é o objeto que foi exportado pelo EventEmitter, que aqui é do tipo Todo 
 -->
+<app-add-todo (addTodo)="addTodo($event)"></app-add-todo>
 <app-todo-item *ngFor="let todo of todos" [todo]="todo" (deleteTodo)="deleteTodo($event)">
 
 </app-todo-item>
