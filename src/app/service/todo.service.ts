@@ -45,4 +45,10 @@ export class TodoService {
     // @param body — The resources to add/update.
     // @param options — HTTP options
   }
+
+  deleteTodo(todo:Todo):Observable<Todo> {
+    const url = `${this.todosUrl}/${todo.id}`;
+    return this.http.delete<Todo>(url, httpOptions);
+
+  }
 }

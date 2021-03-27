@@ -22,7 +22,13 @@ export class TodosComponent implements OnInit {
   }
   
   deleteTodo(todo: Todo) {
-    console.log('deletado', todo)
+    // UI - fazendo a deleção na tela
+    // Usando o filter (filtrando meus itens). Toda vez que eu clico em deletar eu capturo o ID do item. Em posso do ID eu faço um filter
+    // usando arrow function e só retorno para o todos os itens diferentes do id excluído
+    this.todos = this.todos.filter(t => t.id !== todo.id);
+
+    // Serviço
+    this.todoService.deleteTodo(todo).subscribe(); // Não preciso passar mais nada pois é uma deleção
   }
 
 }

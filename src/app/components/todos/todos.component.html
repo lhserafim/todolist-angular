@@ -19,5 +19,5 @@
     $event é o objeto que foi exportado pelo EventEmitter, que aqui é do tipo Todo 
 -->
 <app-todo-item *ngFor="let todo of todos" [todo]="todo" (deleteTodo)="deleteTodo($event)">
-    console.log($event)
+
 </app-todo-item>
