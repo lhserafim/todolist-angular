@@ -16,7 +16,10 @@ export class TodosComponent implements OnInit {
   constructor(private todoService:TodoService) { }
 
   ngOnInit(): void {
-    this.todos = this.todoService.getTodos(); // este método carrega um array de objetos
+    this.todoService.getTodos().subscribe(todos => {
+      this.todos = todos;
+    })
+    //this.todos = this.todoService.getTodos(); // este método carrega um array de objetos
     // Movido o HardCode para o todo.service.ts
     // this.todos = [
     //   {

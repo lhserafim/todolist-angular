@@ -37,6 +37,24 @@ um deles. Exemplo: <app-todo>, <app-todo-item>, etc
 7. EVENTOS: Os eventos permitem que você "escute e responda" a ações do usuário feitas através do mouse e do teclado. A sintaxe do evento
    Deve ser (), ex.: (click), (change), (input), etc. Capturando este evento, posso chamar meus métodos e/ou alterar uma propriedade da tag
    sem usar a diretiva de atributo
-8. SERVICES:
+8. SERVICES: Neste exemplo eu criei um service para recuperar os dados de uma "API". O service foi injetado dentro do construtor do meu componente
+   e assim no meu compomente eu consigo chamar o service (que foi importado e injetado), e executar os métodos que ele possua para recuperar os dados
+   que eu quero e carregá-los no meu ngOnInit() e por fim no meu HTML.
     8.1. Criando um service: ng g s service/Todo
     8.2. A importação do Injectable permite injetar o service dentro de um construtor de um componente
+9. Para que possamos usar um backend, consultar uma API, é necessário fazer uma importação no módulo app.module.ts (este é o módulo onde as importações mais abrangentes são feitas)
+    9.1. import { HttpClientModule } from '@angular/common/http' e associar nos imports
+    9.2. Uma vez feito esta importação no app.module.ts, eu preciso importá-lo no todo.service.ts
+        9.2.1. import { HttpClient, HttpHeaders } from '@angular/common/http'
+        9.2.2. E depois injetá-lo no construtor constructor(private http:HttpClient) { }
+10. Quando utilizamos um service, para consumir uma API que retorna um Observable, precisamos SEMPRE lembrar que estamos utlizando o conceito de Promises
+    Desta forma, os componentes que usam o service e chamam este método precisam subescrever para poder usá-lo. 
+    Ou seja, estou me subescrevendo no observador (igual o exemplo do aniversário surpresa)
+    Ex.: SERVICE
+        getTodos():Observable<Todo[]> {
+            return this.http.get<Todo[]>(this.todosUrl);
+        }
+    Ex.: COMPONENT
+        this.todoService.getTodos().subscribe(todos => {
+            this.todos = todos;
+        })
