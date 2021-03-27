@@ -4,11 +4,20 @@
     <li>{{ todo.title }}</li>
 </ul> -->
 
-<!-- Componentização: Ao invés de ter um componente todos (apenas) eu vou trazer uma lista de todo-item, ou seja
-cada item de todo será um componente de todo-item -->
-<!-- Para poder usar o [todo] necessário criar:
-export class TodoItemComponent implements OnInit {
-    @Input() todo: Todo; -->
-<app-todo-item *ngFor="let todo of todos" [todo]="todo">
+<!-- 
+    Componentização: Ao invés de ter um componente todos (apenas) eu vou trazer uma lista de todo-item, ou seja
+    cada item de todo será um componente de todo-item -->
+<!-- 
+    Para poder usar o [todo] necessário criar:
+    export class TodoItemComponent implements OnInit {
+    @Input() todo: Todo; 
+-->
 
+<!-- 
+    (deleteTodo) é o evento, e tem o nome que foi criado no @Output em todo-item.component.ts
+    deleteTodo() é o método criado em todos.component.ts
+    $event é o objeto que foi exportado pelo EventEmitter, que aqui é do tipo Todo 
+-->
+<app-todo-item *ngFor="let todo of todos" [todo]="todo" (deleteTodo)="deleteTodo($event)">
+    console.log($event)
 </app-todo-item>

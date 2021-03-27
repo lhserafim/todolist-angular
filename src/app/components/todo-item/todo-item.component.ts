@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+// Para poder fazer o delete, como teremos que subir hierarquicamente falando do todo-item para todo, 
+// precisamos adicionar: EventEmitter, Output
+
 import { Todo } from 'src/app/models/Todo';
 import { TodoService } from '../../service/todo.service'
 
@@ -9,23 +12,14 @@ import { TodoService } from '../../service/todo.service'
 })
 export class TodoItemComponent implements OnInit {
   @Input() todo: Todo;
+  @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter(); // Este @Output foi importado com o EventEmitter
+  // este deleteTodo será capturado no componente Pai
 
   constructor(private todoService:TodoService) { }
 
   ngOnInit(): void {
   }
 
-  // Setar a classe dinâmicamente, para usar no todo-item.component.html, como uma diretiva de atributo
-  // Dentro da variável let estou criando um objeto que tem relação com o css criado neste componente. Conforme abaixo
-  // .todo {
-  //   background: #f4f4f4;
-  //   padding: 10px;
-  //   border-bottom: 1px #ccc dotted;
-  // }
-  
-  // .is-complete {
-  //   text-decoration: line-through;
-  // }
   setClasses() {
     let classes = {
       todo: true,
@@ -35,7 +29,6 @@ export class TodoItemComponent implements OnInit {
   }
 
   onToggle(todo) {
-    // console.log('toggle');
     // UI na tela
     todo.completed = !todo.completed; // usando a negação p/ ficar mudando de completo para nâo completo
     
@@ -46,6 +39,6 @@ export class TodoItemComponent implements OnInit {
   }
 
   onDelete(todo) {
-    console.log('delete');
+    this.deleteTodo.emit(todo); // Este deleteTodo foi criado no @Output
   }
 }

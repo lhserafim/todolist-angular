@@ -19,25 +19,10 @@ export class TodosComponent implements OnInit {
     this.todoService.getTodos().subscribe(todos => {
       this.todos = todos;
     })
-    //this.todos = this.todoService.getTodos(); // este método carrega um array de objetos
-    // Movido o HardCode para o todo.service.ts
-    // this.todos = [
-    //   {
-    //     id: 1,
-    //     title: 'Todo One',
-    //     completed: false
-    //   },
-    //   {
-    //     id: 2,
-    //     title: 'Todo Two',
-    //     completed: true
-    //   },
-    //   {
-    //     id: 1,
-    //     title: 'Todo Three',
-    //     completed: false
-    //   }
-    // ]
+  }
+  
+  deleteTodo(todo: Todo) {
+    console.log('deletado', todo)
   }
 
 }

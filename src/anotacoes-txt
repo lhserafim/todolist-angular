@@ -92,3 +92,12 @@ um deles. Exemplo: <app-todo>, <app-todo-item>, etc
                       this.todoService.toggleCompleted(todo).subscribe(todo => {
                         console.log(todo);
                     })
+11. Como está funcionando a deleção...
+    Em todo-item
+        Ao clicar no botão da tela (evento: (click)), é chamado o método onDelete(todo), passando o objeto todo
+        Este método encontra-se na todo-item.component.ts
+        Este método precisa "conversar" o Parent (pai) e para isso o que fazemos é um Output do evento personalizado de tipo Todo
+        Ou seja, criamos um evento deleteTodo e através das importações de Output e EventEmitter conseguimos enviar para o todo
+    Em todo
+        Dentro da tag app-todo-item, criamos um evento(deleteTodo), chamando um método criado na todos.component.ts. 
+        O método recebe a captura do evento, através de $event e executa o método.    
