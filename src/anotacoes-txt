@@ -47,14 +47,48 @@ um deles. Exemplo: <app-todo>, <app-todo-item>, etc
     9.2. Uma vez feito esta importação no app.module.ts, eu preciso importá-lo no todo.service.ts
         9.2.1. import { HttpClient, HttpHeaders } from '@angular/common/http'
         9.2.2. E depois injetá-lo no construtor constructor(private http:HttpClient) { }
-10. Quando utilizamos um service, para consumir uma API que retorna um Observable, precisamos SEMPRE lembrar que estamos utlizando o conceito de Promises
+10. Quando utilizamos um service, para consumir uma API que retorna um Observable, precisamos SEMPRE lembrar que estamos utilizando o conceito de Promises
     Desta forma, os componentes que usam o service e chamam este método precisam subescrever para poder usá-lo. 
     Ou seja, estou me subescrevendo no observador (igual o exemplo do aniversário surpresa)
-    Ex.: SERVICE
-        getTodos():Observable<Todo[]> {
-            return this.http.get<Todo[]>(this.todosUrl);
-        }
-    Ex.: COMPONENT
-        this.todoService.getTodos().subscribe(todos => {
-            this.todos = todos;
-        })
+    10.1. Fazendo um GET
+        10.1.1. Criar um SERVICE
+        10.1.2. Importar:
+                import { Injectable } from '@angular/core'
+                import { HttpClient, HttpHeaders } from '@angular/common/http' // Para fazer esta importação, antes eu preciso fazer a importação do import { HttpClientModule } from '@angular/common/http' e associar nos imports no app.module.ts
+                import { Observable } from 'rxjs'
+        10.1.3. Injetar o Httpclient no construtor: constructor(private http:HttpClient) { }
+        10.1.4. Criar o método desejado no SERVICE
+                Ex.: SERVICE
+                    getTodos():Observable<Todo[]> {
+                        return this.http.get<Todo[]>(this.todosUrl);
+                    }
+        10.1.5. Criar o método desejado no COMPONENT
+                Ex.: COMPONENT
+                    this.todoService.getTodos().subscribe(todos => {
+                        this.todos = todos;
+                    })
+    10.2. Fazendo um PUT
+        10.2.1. Criar um SERVICE
+        10.2.2. Importar:
+                import { Injectable } from '@angular/core'
+                import { HttpClient, HttpHeaders } from '@angular/common/http' // Para fazer esta importação, antes eu preciso fazer a importação do import { HttpClientModule } from '@angular/common/http' e associar nos imports no app.module.ts
+                import { Observable } from 'rxjs'
+        10.2.3. Criar uma propriedade para passar como Header
+                Ex.: 
+                const httpOptions =  {
+                        headers: new HttpHeaders({
+                            'Content-Type': 'application/json'
+                        })
+                    }
+        10.2.4. Injetar o Httpclient no construtor: constructor(private http:HttpClient) { }
+        10.2.4. Criar o método desejado no SERVICE
+                Ex.: SERVICE
+                toggleCompleted(todo: Todo):Observable<any> {
+                    const url = `${this.todosUrl}/${todo.id}`; // montando a URL e passando o ID p/ poder fazer o put (update)
+                    return this.http.put(url, todo, httpOptions); // httpOptions é para incluir o Header do ContentType
+                }
+        10.2.5. Criar o método desejado no COMPONENT
+                Ex.: COMPONENT
+                      this.todoService.toggleCompleted(todo).subscribe(todo => {
+                        console.log(todo);
+                    })
