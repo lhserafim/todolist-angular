@@ -8,7 +8,8 @@ import { AppComponent } from './app.component';
 import { TodosComponent } from './components/todos/todos.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { HeaderComponent } from './components/layout/header/header.component';
-import { AddTodoComponent } from './components/add-todo/add-todo.component'; // Foi incluído automaticamente, uma vez que eu rodei o comando ng g component components/todos
+import { AddTodoComponent } from './components/add-todo/add-todo.component';
+import { AboutComponent } from './components/pages/about/about.component'; // Foi incluído automaticamente, uma vez que eu rodei o comando ng g component components/todos
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AddTodoComponent } from './components/add-todo/add-todo.component'; // 
     TodosComponent,
     TodoItemComponent,
     HeaderComponent,
-    AddTodoComponent // Aqui tmb foi inclusão automática
+    AddTodoComponent,
+    AboutComponent // Aqui tmb foi inclusão automática
   ],
   imports: [
     BrowserModule,

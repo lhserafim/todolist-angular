@@ -106,3 +106,59 @@ um deles. Exemplo: <app-todo>, <app-todo-item>, etc
     12.1. Para poder utilizar o [(ngModel)]="title" é necessário fazer a importação abaixo em app.module.ts 
           import { FormsModule } from '@angular/forms';
           E adicionar aos imports
+13. Como o add-todo está funcionando.
+    13.1. Dentro do componente (add-todo.component.ts), foi criado uma propriedade dentro da classe: title:string;
+    13.2. Como eu quero criar um campo de texto e um botão de submit na tela, então eu alterei o add-todo.component.html e adicionei 
+          as tags necessárias p/ criar um input e um submit, conforme abaixo.
+            Ex.:
+            <form class="form">
+                <input type="text" name="title" [(ngModel)]="title" placeholder="Add Todo...">
+                <input type="submit" value="Submit" class="btn">
+            </form>
+        13.2.1. A sacada aqui é o uso da diretiva de atributo ngModel, como uma TWO WAY DATA BIND, através da sintaxe:[(ngModel)]="title"
+            13.2.1.1. Estas sintaxe permite que o dado digitado sejá atualizado automaticamente com a propriedade criada e exportada title
+        13.2.2. Para poder usar a tag <form> eu precisei fazer uma importação import { FormsModule } from '@angular/forms' no app.module.ts
+                e adicionar aos imports
+    13.3. Neste caso, como eu quero usar o componente em outro componente (em todos), eu preciso fazer o @Output desta propriedade
+        13.3.1. Para isso eu fiz as importações: EventEmitter, Output de '@angular/core';
+        13.3.2. Criei o output para o evento @Output() addTodo: EventEmitter<any> = new EventEmitter();
+        13.3.3. Criei o método onSubmit() que irá popular o objeto Todo e chamar o envio do evento. Repare que estou usando a propriedade title,
+                que foi setada pela diretiva [(ngModel)]
+            Ex.: 
+            onSubmit() {
+                const todo = {
+                title: this.title,
+                completed: false                        
+                }
+                this.addTodo.emit(todo);
+            }
+        13.3.4. E adicionei a tag form, o evento (ngSubmit): <form class="form" (ngSubmit)="onSubmit()">
+                Ou seja, ao clicar no botão submit, o método onSubmit é chamado e um evento é enviado. O ngSubmit é similar ao Event.preventDefault() do JS
+        13.3.5. No componente onde eu quero colocar a tag, eu adiciono ao html a tag: <app-add-todo (addTodo)="addTodo($event)"></app-add-todo>
+            13.3.5.1. Ou seja, o evento que veio do add-todo, é capturado pela tag, atráves do (addTodo) e chama o método addTodo() passando o objeto recebido
+            13.3.5.2. Dentro do component.ts deste componente (todos.component.ts) eu crio o método addTodo(). Este método, neste caso, irá depender
+                      de um service, pois consumirá uma API e consequentemente terá um subscribe.
+        13.3.6. Por fim, no service, criar o método que fará o http.post.
+                Ex.:
+                addTodo(todo:Todo):Observable<Todo> {
+                    return this.http.post<Todo>(this.todosUrl, todo, httpOptions);
+                }
+14. Roteamento. O roteamento é definido no componente app-routing.module.ts
+    14.1. Dentro do arquivo de roteamento, fazer a importação e definir as rotas conforme abaixo:
+        Ex.:
+        // Importando os componentes que eu quero rotear
+        import { TodosComponent } from './components/todos/todos.component';
+        import { AboutComponent } from './components/pages/about/about.component';
+        // Adicionando componentes as rotas
+        const routes: Routes = [
+        {path: '', component: TodosComponent},
+        {path: 'about', component: AboutComponent} // Quando coloco o path, significa que vai adicionar o /nomeDadoAoPath ao meu site
+        ];
+    14.2. Em seguida, para que o roteamento funcione, eu preciso adicionar a tag de roteamento ao arquivo app.component.html
+        Ex.:
+        <router-outlet></router-outlet>
+    14.3. Por fim, nas páginas onde eu desejo o roteamento, fazer a chamada da tag <a routerLink> conforme exemplo.
+        Ex.:
+        <nav>
+            <a routerLink="/">Home</a> | <a routerLink="/about">About</a>
+        </nav>
